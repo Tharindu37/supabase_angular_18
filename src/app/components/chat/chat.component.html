@@ -22,13 +22,22 @@
       <p>Hi, How are you</p>
       <img src="./more.png" alt="" class="rotate-90 ml-auto cursor-pointer" />
     </div>
-    <div class="w-[95%] h-10 border absolute self-center bottom-2 flex">
-      <input type="text" class="w-full h-full focus:outline-none px-2" />
-      <img
-        src="./send.png"
-        class="py-1 bg-gray-200 px-2 cursor-pointer"
-        alt=""
+    <form
+      [formGroup]="chatForm"
+      (ngSubmit)="onSubmit()"
+      class="w-[95%] h-10 border absolute self-center bottom-2 flex"
+    >
+      <input
+        formControlName="chat_message"
+        type="text"
+        class="w-full h-full focus:outline-none px-2"
       />
-    </div>
+      <button
+        [disabled]="chatForm.invalid"
+        class="py-1 bg-gray-200 flex items-center p-2 cursor-pointer"
+      >
+        <img src="./send.png" class="w-10" alt="" />
+      </button>
+    </form>
   </div>
 </div>
