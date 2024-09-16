@@ -39,13 +39,13 @@ ng g environments
 
 ### Database
 <!-- ## Database Table Schema -->
-## users table
+users table
 
 * id (uuid)
 * full_name (text)
 * avatar_url (text)
 
-## Creating a users table
+Creating a users table
 
 ```sql
 CREATE TABLE public.users (
@@ -56,13 +56,13 @@ CREATE TABLE public.users (
 );
 ```
 
-## Enable Row Level Security
+Enable Row Level Security
 
 ```sql
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 ```
 
-## Permit Users Access Their Profile
+Permit Users Access Their Profile
 
 ```sql
 CREATE POLICY "Permit Users to Access Their Profile"
@@ -71,7 +71,7 @@ CREATE POLICY "Permit Users to Access Their Profile"
   USING ( auth.uid() = id );
 ```
 
-## Permit Users to Update Their Profile
+Permit Users to Update Their Profile
 
 ```sql
 CREATE POLICY "Permit Users to Update Their Profile"
@@ -80,7 +80,7 @@ CREATE POLICY "Permit Users to Update Their Profile"
   USING ( auth.uid() = id );
 ```
 
-## Supabase Functions
+Supabase Functions
 
 ```sql
 CREATE
@@ -96,7 +96,7 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 ```
 
-## Supabase Trigger
+Supabase Trigger
 
 ```sql
   CREATE TRIGGER
@@ -107,7 +107,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
     public.user_profile();
 ```
 
-## Chat_Messages table (Real Time)
+Chat_Messages table (Real Time)
 
 * id (uuid)
 * Created At (date)
