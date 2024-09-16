@@ -1,0 +1,34 @@
+<div class="w-screen h-screen flex justify-center items-center flex-col">
+  <div
+    class="w-1/2 p-2 mb-1 border flex justify-between items-center rounded-md"
+  >
+    <h1 class="font-bold text-lg">Hi Chat</h1>
+    <button
+      (click)="logOut()"
+      class="border px-1.5 py-0.5 rounded-md bg-gray-200"
+    >
+      Logout
+    </button>
+  </div>
+  <div
+    class="w-1/2 h-2/3 border rounded-md overflow-y-scroll p-2 flex flex-col relative"
+  >
+    <div class="w-full py-2 border rounded-md flex gap-3 items-center px-5">
+      <img
+        src="./google.png"
+        class="w-10 h-10 rounded-full border overflow-hidden bg-cover"
+        alt=""
+      />
+      <p>Hi, How are you</p>
+      <img src="./more.png" alt="" class="rotate-90 ml-auto cursor-pointer" />
+    </div>
+    <div class="w-[95%] h-10 border absolute self-center bottom-2 flex">
+      <input type="text" class="w-full h-full focus:outline-none px-2" />
+      <img
+        src="./send.png"
+        class="py-1 bg-gray-200 px-2 cursor-pointer"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
