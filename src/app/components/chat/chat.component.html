@@ -1,8 +1,8 @@
-<div class="w-screen h-screen flex justify-center items-center flex-col">
+<div class="flex flex-col items-center justify-center w-screen h-screen">
   <div
-    class="w-1/2 p-2 mb-1 border flex justify-between items-center rounded-md"
+    class="flex items-center justify-between p-2 mb-1 border rounded-md w-96"
   >
-    <h1 class="font-bold text-lg">Hi Chat</h1>
+    <h1 class="text-lg font-bold">Hi Chat</h1>
     <button
       (click)="logOut()"
       class="border px-1.5 py-0.5 rounded-md bg-gray-200"
@@ -11,33 +11,50 @@
     </button>
   </div>
   <div
-    class="w-1/2 h-2/3 border rounded-md overflow-y-scroll p-2 flex flex-col relative"
+    #chatContainer
+    class="relative flex flex-col p-2 overflow-y-scroll border rounded-md w-96 h-2/3"
   >
-    <div class="w-full py-2 border rounded-md flex gap-3 items-center px-5">
+    @for (msg of this.chats(); track msg) {
+    <div class="flex w-full gap-3 px-5 py-2 mt-1 border rounded-md">
       <img
-        src="./google.png"
-        class="w-10 h-10 rounded-full border overflow-hidden bg-cover"
+        src="{{ msg.users.avatar_url }}"
+        class="w-12 h-12 overflow-hidden bg-cover border rounded-full"
         alt=""
       />
-      <p>Hi, How are you</p>
-      <img src="./more.png" alt="" class="rotate-90 ml-auto cursor-pointer" />
-    </div>
-    <form
-      [formGroup]="chatForm"
-      (ngSubmit)="onSubmit()"
-      class="w-[95%] h-10 border absolute self-center bottom-2 flex"
-    >
-      <input
-        formControlName="chat_message"
-        type="text"
-        class="w-full h-full focus:outline-none px-2"
+      <div>
+        <div>
+          <h3 class="font-medium">{{ msg.users.full_name }}</h3>
+          <p class="text-[12px] mt-[-3px]">{{ msg.created_at }}</p>
+        </div>
+
+        <p>{{ msg.text }}</p>
+      </div>
+      <img
+        (click)="deleteMsg(msg)"
+        src="./delete.png"
+        alt=""
+        class="w-6 h-6 ml-auto cursor-pointer"
       />
-      <button
-        [disabled]="chatForm.invalid"
-        class="py-1 bg-gray-200 flex items-center p-2 cursor-pointer"
-      >
-        <img src="./send.png" class="w-10" alt="" />
-      </button>
-    </form>
+    </div>
+    } @empty {
+    <div>No Chats Available</div>
+    }
   </div>
+  <form
+    [formGroup]="chatForm"
+    (ngSubmit)="onSubmit()"
+    class="flex self-center h-10 mt-1 border rounded-md w-96 bottom-2"
+  >
+    <input
+      formControlName="chat_message"
+      type="text"
+      class="w-full h-full px-2 focus:outline-none"
+    />
+    <button
+      [disabled]="chatForm.invalid"
+      class="flex items-center p-2 py-1 bg-gray-200 cursor-pointer"
+    >
+      <img src="./send.png" class="w-10" alt="" />
+    </button>
+  </form>
 </div>

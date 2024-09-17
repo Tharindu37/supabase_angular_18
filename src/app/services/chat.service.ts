@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment.development';
+import { Chat } from '../models/chat';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
   private supabase!: SupabaseClient;
+  public savedChat = signal({});
 
   constructor() {
     this.supabase = createClient(
@@ -26,5 +28,24 @@ export class ChatService {
       alert(error);
       return null;
     }
+  }
+
+  async listChat() {
+    try {
+      const { data, error } = await this.supabase
+        .from('chat')
+        .select('*, users(*)');
+      if (error) {
+        alert(error.message);
+      }
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteChat(id: string) {
+    const data = await this.supabase.from('chat').delete().eq('id', id);
+    return data;
   }
 }
