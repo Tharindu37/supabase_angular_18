@@ -1,6 +1,6 @@
 import { inject, Injectable, NgZone } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
